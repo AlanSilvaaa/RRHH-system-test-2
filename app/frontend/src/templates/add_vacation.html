@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Register Vacations</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/add_vacation.css') }}">
+      <script src="{{ url_for('static', filename='javascript/dynamic_fetch.js') }}"></script>
+  </head>
+  <header>
+    {% include 'topbar.html' %}
+  </header>
+  <body>
+      <h1>Register Vacations</h1>
+
+      <!-- Display flashed messages -->
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <ul>
+                  {% for message in messages %}
+                      <li>{{ message }}</li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      {% endwith %}
+
+      <!-- Vacation Registration Form -->
+      <form action="/add_vacation" method="POST" class="vacation_form">
+          <!-- Employee RUT -->
+          <label for="employee_rut">Employee RUT:</label>
+          <input type="text" id="employee_rut" name="employee_rut" required oninput="fetchEmployeeName()"><br>
+          
+          <span id="employee_name" style="font-weight: bold;">
+              Employee name: Enter RUT to fetch name
+          </span><br>
+
+          <!-- Start Date -->
+          <label for="start_date">Start Date:</label>
+          <input type="date" id="start_date" name="start_date" required onchange="updateDaysTaken()">
+
+          <!-- End Date -->
+          <label for="end_date">End Date:</label>
+          <input type="date" id="end_date" name="end_date" required onchange="updateDaysTaken()">
+
+          <!-- Days Taken -->
+          <label for="days_taken">Days Taken:</label>
+          <input type="number" id="days_taken" name="days_taken" min="1" required readonly>
+
+          <!-- Accumulated Days -->
+          <label for="accumulated_days">Accumulated Days:</label>
+          <input type="number" id="accumulated_days" name="accumulated_days" min="0" value="15" readonly>
+
+          <!-- Long Service Employee Checkbox -->
+          <label>
+              <input type="checkbox" id="long_service_employee" name="long_service_employee" onchange="updateAccumulatedDays()">
+              Long Service Employee
+          </label>
+
+          <!-- Submit Button -->
+          <button type="submit">Save Vacation</button>
+      </form>
+
+      
+  </body>
+</html>

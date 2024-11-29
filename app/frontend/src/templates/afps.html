@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFP List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='train_eval.css') }}">
+</head>
+
+<header>
+    {% include 'topbar.html' %}
+</header>
+
+<body class="bg-gray-100">
+
+<div class="container mx-auto p-4">
+    <!-- AFP Section -->
+    <h2 class="text-2xl font-semibold mb-4">AFP List</h2>
+    
+    <!-- Table for AFPs -->
+    <h3 class="text-xl font-semibold mb-2">List of AFPs</h3>
+    <div class="overflow-x-auto bg-white shadow rounded-lg">
+        <table class="min-w-full table-auto border-collapse">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-4 py-2 text-left">ID</th>
+                    <th class="px-4 py-2 text-left">Name</th>
+                    <th class="px-4 py-2 text-left">Commission Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for afp in afps %}
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-2">{{ afp.id }}</td>
+                        <td class="px-4 py-2">{{ afp.name }}</td>
+                        <td class="px-4 py-2">{{ afp.commission_percentage }}%</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3" class="px-4 py-2 text-center text-gray-500">No AFPs found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Information Section -->
+    <h3 class="text-xl font-semibold mt-6">Since October 1, 2023, according to the Superintendencia de Pensiones</h3>
+    <p class="mt-2 text-sm">Source: <a href="https://www.spensiones.cl/portal/institucional/594/w3-article-2810.html" target="_blank" class="text-blue-500 underline">Superintendencia de Pensiones</a></p>
+</div>
+
+</body>
+</html>
+

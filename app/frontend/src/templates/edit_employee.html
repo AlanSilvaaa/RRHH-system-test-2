@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_employee.css')}}" />
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet"> -->
+    <title>Edit employee</title>
+</head>
+<body>
+    {% include 'topbar.html' %}
+    <form method="POST" action="{{ url_for('edit_employee') }}" class="edit-employee">
+        <!-- general info -->
+        <h1>Edit employee info</h1>
+        <div class="general-info-container">
+            <h3>general info</h3>
+            {% for key, value in gi_data.items() %}
+                <label for="{{ key }}">{{ key }}</label>
+                <input type="text" value="{{ value }}" placeholder="{{ key }}" class="employee-input" name="{{ key }}"/>
+            {% endfor %}
+        </div>
+        <!-- aditional info -->
+        <div class="aditional-info-container mt-3">
+            <h3>aditional info</h3>
+            {% for key, value in ad_info_data.items() %}
+                <label for="{{ key }}">{{ key }}</label>
+                <input type="text" value="{{ value }}" placeholder="{{ key }}" class="employee-input" name="{{ key }}"/>
+            {% endfor %}
+        </div>
+        <input type="hidden" name="employee_id" value="{{ employee_id }}">
+
+        <button type="submit" class="submit-button">Submit changes</button>
+    </form>
+</body>
+</html>

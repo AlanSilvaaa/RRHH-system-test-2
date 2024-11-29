@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Agregar Empleado</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/add_employee.css') }}">
+
+    </head>
+    <header>
+        {% include 'topbar.html' %}
+    </header>
+    <body>
+        <form method="POST" action="{{ url_for('add_employee') }}" class = "add_employee_form">
+            <h1>Add New Employee</h1>
+            
+            <label for="rut">RUT:</label>
+            <input type="text" id="rut" name="rut" required>
+            
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="birth_date">Birth Date:</label>
+            <input type="date" id="birth_date" name="birth_date" required>
+
+            <label for="start_date">Contract Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="salary">Salary:</label>
+            <input type="number" id="salary" name="salary" required>
+
+            <label for="nationality">Nationlity:</label>
+            <input type="text" id="nationality" name="nationality" required>
+
+            <label for="afp_id">AFP:</label>
+            <select id = "afp_id" name = "afp_id" required> 
+                {% for afp in afps %}
+                    <option value="{{ afp.id }}">{{ afp.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="healthplan_id">Health Plan:</label>
+            <select id="healthplan_id" name="healthplan_id" required>
+                {% for healthplan in healthplans %}
+                    <option value="{{ healthplan.health_plan_id }}">{{ healthplan.name }}</option>
+                {% endfor %}
+            </select>
+            
+
+            <button type="submit">Add Employee</button>
+        </form>
+    </body>
+</html>

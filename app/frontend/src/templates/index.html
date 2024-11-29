@@ -1,0 +1,112 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Employee List</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+    </head>
+    <body>
+      <!-- Top bar with search, options, and user -->
+      <header>
+        {% include 'topbar.html' %}
+      </header>
+
+      <!-- Main content: employee list and filters -->
+      <main>
+        <div class="content">
+          <!-- Employee list -->
+          <section class="employee-list">
+            <div class="header-actions">
+              <h2>Employee List</h2>
+              <a href="{{ url_for('add_employee') }}" class="btn-add-employee">Add Employee</a>
+            </div>
+          
+            <table class="employee-table">
+              <thead>
+                <tr>
+                    <th>RUT</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Position</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>
+                      <a href="{{ url_for('user', id=employee.id) }}" target="_blank">
+                        {{ employee.rut }}
+                      </a>
+                    </td>
+
+                    <td>
+                      <a href="{{ url_for('user', id=employee.id) }}" target="_blank">
+                        {{ employee.first_name.capitalize() }}
+                      </a>
+                    </td>
+
+                    <td>
+                      <a href="{{ url_for('user', id=employee.id) }}" target="_blank">
+                        {{ employee.last_name.capitalize() }}
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{ url_for('user', id=employee.id) }}" target="_blank">
+                        {{ employee.position }}
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{ url_for('user', id=employee.id) }}" target="_blank">
+                        {{ employee.department}}
+                      </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+          </section>      
+
+          <!-- Filters -->
+          <aside class="filters">
+            <h3>Filters</h3>
+
+            <form method="GET" action="{{ url_for('homepage') }}">
+              <label for="job_position">Job Position:</label>
+              <select id="job_position" name="job_position">
+                  <option value="">All Positions</option>
+                  {% for position in job_positions %}
+                      <option value="{{ position.id }}" {% if request.args.get('job_position') == position.id|string %}selected{% endif %}>
+                          {{ position.name }}
+                      </option>
+                  {% endfor %}
+              </select>
+          
+              <label for="department">Department:</label>
+              <select id="department" name="department">
+                  <option value="">All Departments</option>
+                  {% for department in departments %}
+                      <option value="{{ department.id }}" {% if request.args.get('department') == department.id|string %}selected{% endif %}>
+                          {{ department.name }}
+                      </option>
+                  {% endfor %}
+              </select>
+
+
+              <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="1" {% if request.args.get('status', 'active') == '1' %}selected{% endif %}>Active</option>
+                    <option value="0" {% if request.args.get('status') == '0' %}selected{% endif %}>Inactive</option>
+                    <option value="">All</option>
+
+                </select>
+          
+              <button type="submit">Apply Filters</button>
+          </form>
+          
+          </aside>
+        </div>
+      </main>
+    </body>
+  </html>

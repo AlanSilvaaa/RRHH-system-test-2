@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contract</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add-contract.css') }}">
+    <script src="{{ url_for('static', filename='javascript/dynamic_fetch.js') }}"></script>
+</head>
+<body>
+    <header>
+      {% include 'topbar.html' %}
+    </header>
+
+    <h1>Add New Contract</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/add_contract" method="POST" id="contractForm">
+      <label for="employee_rut">Employee RUT:</label>
+      <input type="text" id="employee_rut" name="employee_rut" required oninput="fetchEmployeeName()"><br>
+      
+      <span id="employee_name" style="font-weight: bold;">
+          Employee name: Enter RUT to fetch name
+      </span><br>
+      
+      <!-- Type of Contract Dropdown -->
+      <label for="contract_type">Type of Contract:</label>
+      <select id="contract_type" name="contract_type" required>
+          <option value="fixed">Fixed</option>
+          <option value="temporary">Temporary</option>
+          <option value="replacement">Replacement</option>
+          <option value="permanent">Permanent</option>
+      </select><br>
+      
+      <label for="start_date">Start Date:</label>
+      <input type="date" id="start_date" name="start_date" required><br>
+      
+      <label for="end_date">End Date:</label>
+      <input type="date" id="end_date" name="end_date" required><br>
+      
+      <!-- Classification Dropdown -->
+      <label for="classification">Classification:</label>
+      <select id="classification" name="classification" required>
+          <option value="auxiliary">Auxiliary</option>
+          <option value="administrative">Administrative</option>
+          <option value="technical">Technical</option>
+          <option value="professional">Professional</option>
+          <option value="executive">Executive</option>
+      </select><br>
+
+      <label for="job_position">Job Position:</label>
+              <select id="job_position" name="job_position">
+                  {% for position in job_positions %}
+                      <option value="{{ position.name }}" {% if request.args.get('job_position') == position.id|string %}selected{% endif %}>
+                          {{ position.name }}
+                      </option>
+                  {% endfor %}
+              </select>
+          
+              <label for="department">Department:</label>
+              <select id="department" name="department">
+                  {% for department in departments %}
+                      <option value="{{ department.name }}" {% if request.args.get('department') == department.id|string %}selected{% endif %}>
+                          {{ department.name }}
+                      </option>
+                  {% endfor %}
+              </select>
+      <button type="submit">Add Contract</button>
+    </form>
+</body>
+</html>

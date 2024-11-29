@@ -1,0 +1,298 @@
+/* Global styles */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Active Theme (for active employees) */
+body.active {
+  background-color: #f4f4f4; /* Light background for active */
+  color: #333; /* Text color */
+}
+
+body.active .user-general-info-container {
+  background-color: #296b2d; /* Green background for boxes */
+  color: white;
+}
+
+body.active .edit-button {
+  background-color: #4CAF50; /* Green button for active */
+}
+
+body.active .open-button,
+body.active #remove-contract-btn {
+  background-color: #296b2d; /* Green buttons */
+}
+
+body.active .open-button:hover,
+body.active #remove-contract-btn:hover {
+  background-color: #45a049; /* Hover effect for buttons */
+}
+
+body.active .contract-info,
+body.active .aditional-info-container {
+  background-color: #fff;
+  color: #333;
+}
+
+body.active .aditional-info li {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+/* Inactive Theme (for inactive employees) */
+body.inactive {
+  background-color: #e0e0e0; /* Light gray background for inactive */
+  color: #b0b0b0; /* Lighter text color for inactive */
+}
+
+body.inactive .user-general-info-container {
+  background-color: #757575; /* Gray background for boxes */
+  color: #dcdcdc; /* Light text color */
+}
+
+body.inactive .edit-button {
+  background-color: #757575; /* Gray button for inactive */
+  color: #dcdcdc;
+}
+
+body.inactive .open-button,
+body.inactive #remove-contract-btn {
+  background-color: #757575; /* Gray buttons */
+}
+
+body.inactive .open-button:hover,
+body.inactive #remove-contract-btn:hover {
+  background-color: #606060; /* Hover effect for gray buttons */
+}
+
+body.inactive .contract-info,
+body.inactive .aditional-info-container {
+  background-color: #b0b0b0; /* Lighter background for inactive sections */
+  color:  #333;
+}
+   
+
+body.inactive .aditional-info li {
+  background-color: #f2f2f2; /* Lighter background for list items */
+  color: #a94442; /* Darker text color for inactive state */
+}
+
+/* General button styling */
+button {
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+/* User General Info Section */
+.user-general-info-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #296b2d; /* Default active color */
+  color: white;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Edit Button */
+.edit-button {
+  position: absolute;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  right: 10px;
+  top: 10px;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+/* Photo Styling */
+.photo {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.general-info p {
+  margin: 5px 0;
+}
+
+/* Additional Info Section */
+.aditional-info-container {
+  background-color: #fff; /* Default background */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.contract-info {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.contract-info h2,
+.aditional-info h2 {
+  color: #296b2d;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.aditional-info p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.aditional-info ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.aditional-info li {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Open Button */
+.open-button {
+  background-color: #296b2d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+  transition: opacity 0.3s;
+  font-size: 16px;
+}
+
+#remove-contract-btn {
+  background-color: #296b2d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 280px;
+  transition: opacity 0.3s;
+  font-size: 16px;
+}
+
+#remove-contract-btn:hover {
+  opacity: 0.9;
+}
+
+/* Popup Form */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.form-container {
+  max-width: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container .btn {
+  background-color: #45a049;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.form-container .btn.cancel {
+  background-color: red;
+}
+
+.form-container .btn:hover {
+  opacity: 0.9;
+}
+
+/* Error Message Styling */
+p.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Missing Information Section */
+.missing-info {
+  margin-top: 15px;
+  background-color: #ffe5e5;
+  border-radius: 5px;
+  padding: 10px;
+  color: #a94442;
+  font-weight: bold;
+}
+
+.missing-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.missing-info ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.missing-info li {
+  padding: 5px;
+  text-align: left;
+}

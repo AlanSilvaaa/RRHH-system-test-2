@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:9.0.1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: a301rrhh
+      MYSQL_DATABASE: hr
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  flask:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend:/app/backend
+      - ./frontend/src:/app/frontend/src
+
+volumes:
+  mysql-data:

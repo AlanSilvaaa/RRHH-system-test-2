@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topbar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars"></i> Menu</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/afps">AFP List</a>
+                <a href="/health_plans">Health Plans</a>
+                <a href="/companies">Affiliate Companies</a>
+            </div>
+        </div>
+        
+        <!-- Clickable image link to homepage -->
+        <a href="/" class="homepage-image">     
+            <img src="{{ url_for('static', filename='images/hr-icon.png') }}" alt="Homepage Image" style="height: 40px; margin: 0 15px;">
+        </a>
+
+        <!-- Search Bar -->
+        <form action="{{ url_for('user') }}" method="get" class="search-form">
+            <input type="text" id="search-bar" name="search_query" placeholder="Search employees...">
+        </form>
+
+        <nav class="menu-options">
+            <a href="/remuneration">Remunerations</a>
+            <a href="/contracts">Contracts</a>
+            <a href="/vacations">Vacations</a>
+            <a href="/train_eval">Evaluation/Training</a>
+        </nav>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="main-content">
+        <!-- Aquí se coloca el contenido principal de la página -->
+    </div>
+
+    <script src="{{ url_for('static', filename='javascript/dropdown_menu.js') }}"></script>
+</body>
+</html>

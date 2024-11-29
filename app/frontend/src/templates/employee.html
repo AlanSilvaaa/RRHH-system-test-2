@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee ({{ first_name }} {{ last_name }})</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/employee.css')}}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<header>
+  {% include 'topbar.html' %}
+</header>
+
+<body class="{{ 'active' if status == 'Active' else 'inactive' }}">
+  {% if error_message %}
+      <p class="error-message">{{ error_message }}</p>
+  {% else %}
+    <div class="user-general-info-container">
+      <div>
+        <div class="photo">
+          <img src="{{ url_for('static', filename='images/user.png') }}" alt="user-photo" />
+          <p>{{ first_name }} {{ last_name }}</p> <!-- Show employee name in the photo section -->
+        </div>
+        <p>Status: {{ status }}</p>
+      </div>
+      <div class="general-info">
+        <p>Name: {{ first_name }} {{ last_name }}</p>
+        <p>Email: {{ email }}</p>
+        <p>Phone number: {{ phone }}</p>
+        <p>Rut: {{ rut }}</p>
+        <p>Position: {{ position }}</p>
+      </div>
+        <a href="{{ url_for('edit_employee', id=employee_id) }}">
+          <button class="edit-button">Edit</button>
+        </a>
+    </div>
+    
+    <div class="aditional-info-container">
+      <div class="aditional-info">
+          <h2>Additional Info</h2>
+          <p>Net Amount: ${{ net_amount if net_amount else "Not registered" }}</p>
+          <p>Health Plan: {{ health_plan if health_plan else "Not registered" }}</p>
+          <p>Afp: {{ afp_name if afp_name else "Not registered" }}</p>
+          <p>Nationality: {{ nationality if nationality else "Not registered" }}</p>
+          <p>Birth Date: {{ birth_date if birth_date else "Not registered" }} 
+              {% if age %} (Age: {{ age }}) {% endif %}
+          </p>
+          <p>Start Date: {{ start_date if start_date else "Not registered" }} 
+              {% if days_since_start %} (Days since: {{ days_since_start }}) {% endif %}
+          </p>
+          <p>AVG Salary: ${{ salary if salary else "Not registered" }}</p>
+          
+          {% if missing_info %}
+              <h3>Missing Information:</h3>
+              <ul>
+                  {% for message in missing_info %}
+                      <li>{{ message }}</li>
+                  {% endfor %}
+              </ul>
+          {% endif %}
+      </div>
+    </div>
+    
+    <!-- Current Contract Information -->
+    <div class="contract-info">
+      <h2>Current Contract</h2>
+      {% if contract %}
+        <p>Contract Type: {{ contract.contract_type }}</p>
+        <p>Start Date: {{ contract.start_date }}</p>
+        <p>End Date: {{ contract.end_date if contract.end_date else "Ongoing" }}</p>
+        <p>Classification: {{ contract.classification }}</p>
+        <p>Position: {{ contract.position }}</p>
+        <p>Registration Date: {{ contract.registration_date }}</p>
+      {% else %}
+          <p>No contract registered</p>
+      {% endif %}
+    </div>
+    
+    <button class="open-button" onclick="openForm()">Add contract</button>
+
+    <div class="form-popup" id="myForm">
+      <div class="form-container">
+        {% include 'add_contract.html' %}
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </div>
+      <script src="{{ url_for('static', filename='javascript/add_button.js') }}"></script>
+    </div>
+
+    <button class="remove-contract-btn" onclick="openRemoveForm()">Deactivate Employee</button>
+
+    <div class="form-popup" id="removeForm">
+      <div class="form-container">
+        {% include 'disable_employee.html' %}
+        <button type="button" class="btn cancel" onclick="closeRemoveForm()">Close</button>
+      </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='javascript/remove_button.js') }}"></script>
+    
+  {% endif %}
+</body>
+</html>

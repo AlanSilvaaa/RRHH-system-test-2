@@ -1,0 +1,59 @@
+/* Contenedor principal */
+.container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+/* Contenedor de tabla */
+.table-container {
+    max-height: 400px; /* Altura máxima del contenedor de tabla */
+    overflow-y: auto;  /* Scroll vertical */
+    border: 1px solid #ccc;
+}
+
+/* Estilos de la tabla */
+.company-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.company-table th, 
+.company-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.company-table th {
+    background-color: #333;
+    color: white;
+}
+
+.company-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.company-table tr:hover {
+    background-color: #ddd;
+}
+
+/* Botón de añadir compañía */
+.btn-add-company {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-company:hover {
+    background-color: #45a049;
+}

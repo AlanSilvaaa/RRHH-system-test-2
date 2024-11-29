@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacations List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vacations.css') }}">
+</head>
+<header>
+    {% include 'topbar.html' %}
+</header>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <!-- Vacations Section -->
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold mb-2">Vacations</h2>
+            <div class="overflow-auto h-[80vh]">
+                <table class="table-auto w-full border border-gray-300">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="border border-gray-300 px-4 py-2">ID</th>
+                            <th class="border border-gray-300 px-4 py-2">Name</th>
+                            <th class="border border-gray-300 px-4 py-2">Start Date</th>
+                            <th class="border border-gray-300 px-4 py-2">End Date</th>
+                            <th class="border border-gray-300 px-4 py-2">Days Taken</th>
+                            <th class="border border-gray-300 px-4 py-2">Accumulated Days</th>
+                            <th class="border border-gray-300 px-4 py-2">Long Service</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vacation in vacations %}
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">{{ vacation.id }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ vacation.employee }}</td> 
+                                <td class="border border-gray-300 px-4 py-2">{{ vacation.start_date }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ vacation.end_date }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ vacation.days_taken }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ vacation.accumulated_days }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ 'Yes' if vacation.long_service_employee else 'No' }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>         
+                </table>
+            </div>
+        </div>
+
+        <!-- Add Vacation Button -->
+        <a href="{{ url_for('add_vacation') }}" 
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-300">
+            Add Vacation
+        </a>
+
+    </div>
+</body>
+</html>

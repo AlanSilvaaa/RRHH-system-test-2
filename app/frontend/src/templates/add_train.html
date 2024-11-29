@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Training</title>
+    <script src="{{ url_for('static', filename='javascript/dynamic_fetch.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<header>
+  {% include 'topbar.html' %}
+</header>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
+      
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class="mb-4">
+        {% for message in messages %}
+        <li class="text-sm text-red-500">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      
+      <form action="/add_training" method="POST" id="trainingForm" class="space-y-4">
+        <!-- Employee RUT -->
+        <h1 class="text-2xl font-bold mb-4 text-gray-700">Add New Training</h1>
+            <div>
+              <label for="employee_rut" class="block text-sm font-medium text-gray-700">Employee RUT:</label>
+              <input type="text" id="employee_rut" name="employee_rut" required oninput="fetchEmployeeName()"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"><br>
+              
+              <span id="employee_name" style="font-weight: bold;">
+                  Employee name: Enter RUT to fetch name
+              </span><br>
+          </div>
+
+            <!-- Training Date -->
+            <div>
+                <label for="training_date" class="block text-sm font-medium text-gray-700">Training Date</label>
+                <input type="date" id="training_date" name="training_date" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Course -->
+            <div>
+                <label for="course" class="block text-sm font-medium text-gray-700">Course</label>
+                <input type="text" id="course" name="course" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Institution -->
+            <div>
+                <label for="institution" class="block text-sm font-medium text-gray-700">Institution</label>
+                <input type="text" id="institution" name="institution" 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Score -->
+            <div>
+                <label for="score" class="block text-sm font-medium text-gray-700">Score</label>
+                <input type="text" id="score" name="score" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Comments -->
+            <div>
+                <label for="comments" class="block text-sm font-medium text-gray-700">Comments</label>
+                <textarea id="comments" name="comments" rows="4" 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-600">
+                    Add Training
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

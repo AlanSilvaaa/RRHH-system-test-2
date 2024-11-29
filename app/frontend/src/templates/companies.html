@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <header>
+        {% include 'topbar.html' %}
+    </header>
+
+    <div class="container mx-auto p-4 bg-gray-100 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold text-gray-800">Company List</h1>
+            <a href="{{ url_for('add_company') }}" 
+               class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded inline-block">
+               Add Company
+            </a>
+        </div>
+     
+
+        <!-- Table for Companies -->
+        <div class="overflow-x-auto bg-white shadow-lg rounded-lg mb-8">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-6 py-3 text-left ">RUT</th>
+                        <th class="px-6 py-3 text-left ">Name</th>
+                        <th class="px-6 py-3 text-left text-sm text-gray-600">Industry</th>
+                        <th class="px-6 py-3 text-left ">Address</th>
+                        <th class="px-6 py-3 text-left text-sm text-gray-600">Phone</th>
+                    </tr>
+                </thead>
+                <tbody class="text-sm text-gray-800">
+                    {% for company in companies %}
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-6 py-4">{{ company.rut }}</td>
+                        <td class="px-6 py-4">{{ company.name }}</td>
+                        <td class="px-6 py-4">{{ company.industry }}</td>
+                        <td class="px-6 py-4">{{ company.address }}</td>
+                        <td class="px-6 py-4">{{ company.phone }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">No companies found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet"> -->

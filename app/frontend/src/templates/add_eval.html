@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Evaluation</title>
+    <script src="{{ url_for('static', filename='javascript/dynamic_fetch.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<header>
+  {% include 'topbar.html' %}
+</header>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
+      
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class="mb-4">
+        {% for message in messages %}
+        <li class="text-sm text-red-500">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      
+      <form action="/add_evaluation" method="POST" id="evaluationForm" class="space-y-4">
+          <h1 class="text-2xl font-bold mb-4 text-gray-700">Add New Evaluation</h1>
+            <!-- Employee ID -->
+            <div>
+              <label for="employee_rut" class="block text-sm font-medium text-gray-700">Employee RUT:</label>
+              <input type="text" id="employee_rut" name="employee_rut" required oninput="fetchEmployeeName()"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"><br>
+              
+              <span id="employee_name" style="font-weight: bold;">
+                  Employee name: Enter RUT to fetch name
+              </span><br>
+          </div>
+
+            <!-- Evaluation Date -->
+            <div>
+                <label for="evaluation_date" class="block text-sm font-medium text-gray-700">Evaluation Date</label>
+                <input type="date" id="evaluation_date" name="evaluation_date" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Evaluator Name -->
+            <div>
+                <label for="evaluator" class="block text-sm font-medium text-gray-700">Evaluator</label>
+                <input type="text" id="evaluator" name="evaluator" required 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Evaluation Factor (Grade) -->
+            <div>
+                <label for="evaluation_factor" class="block text-sm font-medium text-gray-700">Evaluation Factor (Grade)</label>
+                <input type="number" id="evaluation_factor" name="evaluation_factor" step="0.1" min="1" max="7" required oninput="updateRating()" 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Rating -->
+            <div>
+                <label for="rating" class="block text-sm font-medium text-gray-700">Rating</label>
+                <input type="text" id="rating" name="rating" readonly 
+                    class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <!-- Comments -->
+            <div>
+                <label for="comments" class="block text-sm font-medium text-gray-700">Comments</label>
+                <textarea id="comments" name="comments" rows="4" 
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+
+            <div>
+                <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-600">
+                    Add Evaluation
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
